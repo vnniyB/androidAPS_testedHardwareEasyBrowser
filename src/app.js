@@ -4,11 +4,11 @@ let allData = [];
 let filteredData = [];
 let filters = {
   search: '',
-  brand: '',
+  brand: [],
   pump: '',
   working: '',
-  android: '',
-  country: '',
+  android: [],
+  country: [],
   sort: 'newest'
 };
 
@@ -26,12 +26,31 @@ const closeModalBtn = document.getElementById('close-modal');
 const modalBody = document.getElementById('modal-body');
 
 // Filter Selects
-const filterSelects = {
-  brand: document.getElementById('filter-brand'),
+// Filter Elements
+const multiSelects = {
+  brand: {
+    btn: document.getElementById('brand-select-btn'),
+    list: document.getElementById('brand-options-list'),
+    container: document.getElementById('brand-select-container'),
+    label: 'Brands'
+  },
+  android: {
+    btn: document.getElementById('android-select-btn'),
+    list: document.getElementById('android-options-list'),
+    container: document.getElementById('android-select-container'),
+    label: 'Versions'
+  },
+  country: {
+    btn: document.getElementById('country-select-btn'),
+    list: document.getElementById('country-options-list'),
+    container: document.getElementById('country-select-container'),
+    label: 'Countries'
+  }
+};
+
+const singleSelects = {
   pump: document.getElementById('filter-pump'),
-  working: document.getElementById('filter-working'),
-  android: document.getElementById('filter-android'),
-  country: document.getElementById('filter-country')
+  working: document.getElementById('filter-working')
 };
 
 // Constants
@@ -149,10 +168,48 @@ function populateFilterOptions() {
     if (item['Country']) options.country.add(item['Country']);
   });
 
-  // Sort and append
-  Object.keys(options).forEach(key => {
+  // Populate Multi-Selects
+  ['brand', 'android', 'country'].forEach(key => {
+    const list = multiSelects[key].list;
     const sortedValues = Array.from(options[key]).sort();
-    const select = filterSelects[key];
+
+    // Save current styling/state if needed, but we rebuild list
+    list.innerHTML = '';
+
+    sortedValues.forEach(value => {
+      const label = document.createElement('label');
+      label.className = 'select-option';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.value = value;
+      // Restore selection state
+      if (filters[key].includes(value)) {
+        checkbox.checked = true;
+      }
+
+      // Event Listener for Checkbox
+      checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          filters[key].push(value);
+        } else {
+          filters[key] = filters[key].filter(item => item !== value);
+        }
+        updateSelectButtonText(key);
+        applyFilters();
+      });
+
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(value));
+      list.appendChild(label);
+    });
+    updateSelectButtonText(key);
+  });
+
+  // Populate Single Selects
+  ['pump', 'working'].forEach(key => {
+    const select = singleSelects[key];
+    const sortedValues = Array.from(options[key]).sort();
 
     // Clear existing options except first
     while (select.options.length > 1) {
@@ -166,6 +223,16 @@ function populateFilterOptions() {
       select.appendChild(option);
     });
   });
+}
+
+function updateSelectButtonText(key) {
+  const config = multiSelects[key];
+  const count = filters[key].length;
+  if (count === 0) {
+    config.btn.textContent = `Select ${config.label}`;
+  } else {
+    config.btn.textContent = `${count} ${config.label} Selected`;
+  }
 }
 
 // Event Listeners
@@ -182,11 +249,36 @@ function setupEventListeners() {
     applyFilters();
   });
 
-  // Select Filters
-  Object.keys(filterSelects).forEach(key => {
-    filterSelects[key].addEventListener('change', (e) => {
+  // Single Select Filters
+  Object.keys(singleSelects).forEach(key => {
+    singleSelects[key].addEventListener('change', (e) => {
       filters[key] = e.target.value;
       applyFilters();
+    });
+  });
+
+  // Multi-Select Dropdown Toggles and Close Outside
+  Object.keys(multiSelects).forEach(key => {
+    const config = multiSelects[key];
+
+    config.btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Close others
+      Object.keys(multiSelects).forEach(k => {
+        if (k !== key) multiSelects[k].list.classList.add('hidden');
+      });
+      config.list.classList.toggle('hidden');
+    });
+
+    config.list.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent closing when clicking inside list
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', () => {
+    Object.values(multiSelects).forEach(config => {
+      config.list.classList.add('hidden');
     });
   });
 
@@ -195,18 +287,22 @@ function setupEventListeners() {
     // Reset state
     filters = {
       search: '',
-      brand: '',
+      brand: [],
       pump: '',
       working: '',
-      android: '',
-      country: '',
+      android: [],
+      country: [],
       sort: 'newest'
     };
 
     // Reset UI
     globalSearch.value = '';
     sortOrderSelect.value = 'newest';
-    Object.values(filterSelects).forEach(select => select.value = '');
+    Object.values(singleSelects).forEach(select => select.value = '');
+
+    // Reset Multi-Selects logic handled by re-rendering via populate/updateUI or manually unchecking
+    // Re-populate will use empty filter state to render unchecked boxes
+    populateFilterOptions(); // This will re-render checkboxes as unchecked based on cleared filters state
 
     applyFilters();
   });
@@ -237,11 +333,11 @@ function applyFilters() {
       (item['Pump']?.toLowerCase().includes(filters.search));
 
     // Dropdown Filters
-    const brandMatch = !filters.brand || item['Phone Brand'] === filters.brand;
+    const brandMatch = filters.brand.length === 0 || filters.brand.includes(item['Phone Brand']);
     const pumpMatch = !filters.pump || item['Pump'] === filters.pump;
     const workingMatch = !filters.working || item['Working?'] === filters.working;
-    const androidMatch = !filters.android || item['Android version'] === filters.android;
-    const countryMatch = !filters.country || item['Country'] === filters.country;
+    const androidMatch = filters.android.length === 0 || filters.android.includes(item['Android version']);
+    const countryMatch = filters.country.length === 0 || filters.country.includes(item['Country']);
 
     return searchMatch && brandMatch && pumpMatch && workingMatch && androidMatch && countryMatch;
   });
@@ -258,7 +354,7 @@ function applyFilters() {
     return filters.sort === 'newest' ? dateB - dateA : dateA - dateB;
   });
 
-  if (Object.keys(filterSelects['brand'].options).length <= 1) {
+  if (multiSelects['brand'].list.children.length === 0) {
     populateFilterOptions();
   }
 

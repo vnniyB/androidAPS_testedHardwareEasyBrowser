@@ -71,10 +71,14 @@
           </div>
 
           <div class="filter-group">
-            <label for="filter-brand">Phone Brand</label>
-            <select id="filter-brand">
-              <option value="">All Brands</option>
-            </select>
+            <label>Phone Brand</label>
+            <div class="custom-select" id="brand-select-container">
+              <button class="select-btn" id="brand-select-btn">Select Brands</button>
+              <div class="select-options hidden" id="brand-options-list">
+                <!-- Options injected by JS -->
+              </div>
+            </div>
+            <!-- Hidden native select for reference if needed, or remove completely. Removing for cleaner implementation -->
           </div>
 
           <div class="filter-group">
@@ -92,17 +96,23 @@
           </div>
 
           <div class="filter-group">
-            <label for="filter-android">Android Version</label>
-            <select id="filter-android">
-              <option value="">All Versions</option>
-            </select>
+            <label>Android Version</label>
+            <div class="custom-select" id="android-select-container">
+              <button class="select-btn" id="android-select-btn">Select Versions</button>
+              <div class="select-options hidden" id="android-options-list">
+                <!-- Options injected by JS -->
+              </div>
+            </div>
           </div>
 
           <div class="filter-group">
-            <label for="filter-country">Country</label>
-            <select id="filter-country">
-              <option value="">All Countries</option>
-            </select>
+            <label>Country</label>
+            <div class="custom-select" id="country-select-container">
+              <button class="select-btn" id="country-select-btn">Select Countries</button>
+              <div class="select-options hidden" id="country-options-list">
+                <!-- Options injected by JS -->
+              </div>
+            </div>
           </div>
         </div>
 
