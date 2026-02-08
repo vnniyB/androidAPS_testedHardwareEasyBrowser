@@ -16,12 +16,15 @@
   <div id="app">
     <header class="app-header">
       <div class="logo">
-        <h1>AAPS Hardware</h1>
+        <h1>AAPS Tested Hardware Setup (Phones)</h1>
       </div>
+
+
       <nav class="header-nav">
+
         <a href="https://androidaps.readthedocs.io/en/latest/Getting-Started/Phones.html#list-of-tested-phones"
           target="_blank" rel="noopener noreferrer" class="nav-link">
-          Docs
+          androidAPS Docs
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -31,7 +34,7 @@
         </a>
         <a href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vScCNaIguEZVTVFAgpv1kXHdsHl3fs6xT6RB2Z1CeVJ561AvvqGwxMhlmSHk4J056gMCAQE02sAWJvT/pubhtml?gid=683363241&single=true"
           target="_blank" rel="noopener noreferrer" class="nav-link">
-          Sheet
+          Source Sheet
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -40,6 +43,7 @@
           </svg>
         </a>
       </nav>
+
       <div class="search-bar">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
@@ -105,33 +109,34 @@
         <div class="results-meta">
           <span id="results-count">0</span> results found
         </div>
-    </div>
 
-    <div class="contribute-section">
-      <h3>Add your setup!</h3>
-      <p>Help the community by submitting your hardware test results.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoGKLYEx4aUAJ5RWL3xLJeNdmRyxtXmDzpGhuU3Rfcj2H_Jw/viewform&sa=D&source=editors&ust=1770486739884603&usg=AOvVaw17DB4Lk8oWoAl4vn5DSr68"
-        target="_blank" class="btn-primary">
-        Submit Form
-      </a>
-      <div class="qr-code-container">
-        <img src="./qr-code.png" alt="Scan to contribute" class="qr-code">
-        <span>Scan to open form</span>
-      </div>
-    </div>
-    </aside>
 
-    <main class="content-area">
-      <div id="grid-container" class="grid-container">
-        <!-- Cards will be injected here -->
-      </div>
-      <div id="empty-state" class="empty-state hidden">
-        <div class="empty-icon">🔍</div>
-        <h3>No results found</h3>
-        <p>Try adjusting your search or filters.</p>
-      </div>
-    </main>
-  </div>
+        <div class="contribute-section">
+          <h3>Add your setup!</h3>
+          <p>Help the community by submitting your hardware test results.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoGKLYEx4aUAJ5RWL3xLJeNdmRyxtXmDzpGhuU3Rfcj2H_Jw/viewform"
+            target="_blank" class="btn-primary">
+            Submit Form
+          </a>
+          <div class="qr-code-container">
+            <img src="./qr-code.png" alt="Scan to contribute" class="qr-code">
+            <span>or Scan QR code to open form</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <main class="content-area">
+        <div id="grid-container" class="grid-container">
+          <!-- Cards will be injected here -->
+        </div>
+        <div id="empty-state" class="empty-state hidden">
+          <div class="empty-icon">🔍</div>
+          <h3>No results found</h3>
+          <p>Try adjusting your search or filters.</p>
+        </div>
+      </main>
+    </div>
   </div>
 
   <!-- Detail Modal -->

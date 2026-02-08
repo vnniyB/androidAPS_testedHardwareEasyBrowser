@@ -532,7 +532,7 @@ body {
   background-color: #eff6ff;
   border-radius: var(--radius-md);
   border: 1px solid #dbeafe;
-  text-align: center;
+  text-align: left;
 }
 
 .contribute-section h3 {
@@ -561,6 +561,7 @@ body {
   transition: background-color 0.2s;
   width: 100%;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .btn-primary:hover {
@@ -570,7 +571,7 @@ body {
 .qr-code-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 
