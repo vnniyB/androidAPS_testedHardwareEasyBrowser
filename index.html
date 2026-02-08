@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AAPS Hardware Browser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/androidAPS_testedHardwareEasyBrowser/assets/index-y1hcF4pi.js"></script>
+  <link rel="stylesheet" crossorigin href="/androidAPS_testedHardwareEasyBrowser/assets/index-D5OmIstf.css">
+</head>
+
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="logo">
+        <h1>AAPS Hardware</h1>
+      </div>
+      <nav class="header-nav">
+        <a href="https://androidaps.readthedocs.io/en/latest/Getting-Started/Phones.html#list-of-tested-phones"
+          target="_blank" rel="noopener noreferrer" class="nav-link">
+          Docs
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vScCNaIguEZVTVFAgpv1kXHdsHl3fs6xT6RB2Z1CeVJ561AvvqGwxMhlmSHk4J056gMCAQE02sAWJvT/pubhtml?gid=683363241&single=true"
+          target="_blank" rel="noopener noreferrer" class="nav-link">
+          Sheet
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </nav>
+      <div class="search-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="global-search" placeholder="Search devices, pumps, or users..." />
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Filters</h2>
+          <button id="clear-filters" class="btn-text">Clear All</button>
+        </div>
+
+        <div class="filters-container">
+          <div class="filter-group">
+            <label for="sort-order">Sort By</label>
+            <select id="sort-order">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-brand">Phone Brand</label>
+            <select id="filter-brand">
+              <option value="">All Brands</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-pump">Pump</label>
+            <select id="filter-pump">
+              <option value="">All Pumps</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-working">Status</label>
+            <select id="filter-working">
+              <option value="">All Statuses</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-android">Android Version</label>
+            <select id="filter-android">
+              <option value="">All Versions</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-country">Country</label>
+            <select id="filter-country">
+              <option value="">All Countries</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="results-meta">
+          <span id="results-count">0</span> results found
+        </div>
+    </div>
+
+    <div class="contribute-section">
+      <h3>Add your setup!</h3>
+      <p>Help the community by submitting your hardware test results.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoGKLYEx4aUAJ5RWL3xLJeNdmRyxtXmDzpGhuU3Rfcj2H_Jw/viewform&sa=D&source=editors&ust=1770486739884603&usg=AOvVaw17DB4Lk8oWoAl4vn5DSr68"
+        target="_blank" class="btn-primary">
+        Submit Form
+      </a>
+      <div class="qr-code-container">
+        <img src="./qr-code.png" alt="Scan to contribute" class="qr-code">
+        <span>Scan to open form</span>
+      </div>
+    </div>
+    </aside>
+
+    <main class="content-area">
+      <div id="grid-container" class="grid-container">
+        <!-- Cards will be injected here -->
+      </div>
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try adjusting your search or filters.</p>
+      </div>
+    </main>
+  </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button id="close-modal" class="close-btn">&times;</button>
+      <div class="modal-body" id="modal-body">
+        <!-- Details injected here -->
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
