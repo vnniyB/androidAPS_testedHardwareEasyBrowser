@@ -99,7 +99,7 @@ async function fetchData() {
     
     // Initialize list columns layout if empty
     if (listColumns.length === 0 && allData.length > 0) {
-      const excludedColumns = ['Submitted(Form)', 'Using(submitted)', 'Email Address'];
+      const excludedColumns = ['Submitted(Form)', 'Using(submitted)', 'Email Address', 'E-mail adrrs'];
       const allKeys = Object.keys(allData[0]).filter(k => k.trim() !== '' && !excludedColumns.includes(k));
       listColumns = allKeys.map(k => ({ id: k, visible: true }));
       renderColumnDropdown();
