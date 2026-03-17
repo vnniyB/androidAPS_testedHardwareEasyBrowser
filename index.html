@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/androidAPS_testedHardwareEasyBrowser/assets/index-CPBhXJxd.js"></script>
-  <link rel="stylesheet" crossorigin href="/androidAPS_testedHardwareEasyBrowser/assets/index-BpBWpiqz.css">
+  <script type="module" crossorigin src="/androidAPS_testedHardwareEasyBrowser/assets/index-XXSPumiY.js"></script>
+  <link rel="stylesheet" crossorigin href="/androidAPS_testedHardwareEasyBrowser/assets/index-CiI8e8Zw.css">
 </head>
 
 <body>
@@ -140,7 +140,37 @@
       </aside>
 
       <main class="content-area">
-        <div id="grid-container" class="grid-container">
+        <div class="view-toggle-container">
+          <div class="custom-select" id="column-select-container" style="flex: 1; max-width: 200px;">
+            <button class="select-btn" id="column-select-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              Columns
+            </button>
+            <div class="select-options hidden" id="column-options-list" style="width: 250px; right: 0; left: auto; padding: 0.5rem 0;">
+              <!-- Options injected by JS -->
+            </div>
+          </div>
+          
+          <button id="view-list" class="view-toggle-btn active" title="List View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            List
+          </button>
+          <button id="view-grid" class="view-toggle-btn" title="Grid View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Cards
+          </button>
+        </div>
+
+        <div id="list-container" class="list-container">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead id="data-table-head"></thead>
+              <tbody id="data-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="grid-container" class="grid-container hidden">
           <!-- Cards will be injected here -->
         </div>
         <div id="empty-state" class="empty-state hidden">
