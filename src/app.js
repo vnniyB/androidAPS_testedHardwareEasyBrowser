@@ -9,6 +9,8 @@ let filters = {
   working: '',
   android: [],
   country: [],
+  aaps: [],
+  cgm: [],
   sort: 'newest'
 };
 let currentView = 'list';
@@ -56,6 +58,18 @@ const multiSelects = {
     list: document.getElementById('country-options-list'),
     container: document.getElementById('country-select-container'),
     label: 'Countries'
+  },
+  aaps: {
+    btn: document.getElementById('aaps-select-btn'),
+    list: document.getElementById('aaps-options-list'),
+    container: document.getElementById('aaps-select-container'),
+    label: 'AAPS Versions'
+  },
+  cgm: {
+    btn: document.getElementById('cgm-select-btn'),
+    list: document.getElementById('cgm-options-list'),
+    container: document.getElementById('cgm-select-container'),
+    label: 'CGM Brands'
   }
 };
 
@@ -85,7 +99,7 @@ async function fetchData() {
     
     // Initialize list columns layout if empty
     if (listColumns.length === 0 && allData.length > 0) {
-      const excludedColumns = ['Submitted(Form)', 'Using(submitted)'];
+      const excludedColumns = ['Submitted(Form)', 'Using(submitted)', 'Email Address'];
       const allKeys = Object.keys(allData[0]).filter(k => k.trim() !== '' && !excludedColumns.includes(k));
       listColumns = allKeys.map(k => ({ id: k, visible: true }));
       renderColumnDropdown();
@@ -177,7 +191,9 @@ function populateFilterOptions() {
     pump: new Set(),
     working: new Set(),
     android: new Set(),
-    country: new Set()
+    country: new Set(),
+    aaps: new Set(),
+    cgm: new Set()
   };
 
   allData.forEach(item => {
@@ -186,10 +202,12 @@ function populateFilterOptions() {
     if (item['Working?']) options.working.add(item['Working?']);
     if (item['Android version']) options.android.add(item['Android version']);
     if (item['Country']) options.country.add(item['Country']);
+    if (item['AAPS Version']) options.aaps.add(item['AAPS Version']);
+    if (item['CGM Brand']) options.cgm.add(item['CGM Brand']);
   });
 
   // Populate Multi-Selects
-  ['brand', 'android', 'country'].forEach(key => {
+  ['brand', 'android', 'country', 'aaps', 'cgm'].forEach(key => {
     const list = multiSelects[key].list;
     const sortedValues = Array.from(options[key]).sort();
 
@@ -338,6 +356,8 @@ function setupEventListeners() {
       working: '',
       android: [],
       country: [],
+      aaps: [],
+      cgm: [],
       sort: 'newest'
     };
 
@@ -384,8 +404,10 @@ function applyFilters() {
     const workingMatch = !filters.working || item['Working?'] === filters.working;
     const androidMatch = filters.android.length === 0 || filters.android.includes(item['Android version']);
     const countryMatch = filters.country.length === 0 || filters.country.includes(item['Country']);
+    const aapsMatch = filters.aaps.length === 0 || filters.aaps.includes(item['AAPS Version']);
+    const cgmMatch = filters.cgm.length === 0 || filters.cgm.includes(item['CGM Brand']);
 
-    return searchMatch && brandMatch && pumpMatch && workingMatch && androidMatch && countryMatch;
+    return searchMatch && brandMatch && pumpMatch && workingMatch && androidMatch && countryMatch && aapsMatch && cgmMatch;
   });
 
   // Sort
