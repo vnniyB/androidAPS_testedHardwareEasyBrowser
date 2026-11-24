@@ -3,6 +3,9 @@
   // Name must match the Worker created in the Cloudflare dashboard.
   "name": "androidaps-testedhardwareeasybrowser",
   "compatibility_date": "2026-11-01",
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist"
   }
